@@ -15,7 +15,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Grid,
   IconButton,
   Tooltip
 } from '@mui/material';
@@ -267,71 +266,67 @@ function App() {
           </Paper>
 
           {weightEntries.length > 0 && (
-            <Grid container spacing={4}>
-              <Grid item component="div" xs={12} md={8}>
-                <Paper 
-                  elevation={3} 
-                  sx={{ 
-                    p: 4,
-                    background: 'rgba(19, 47, 76, 0.4)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
-                  }}
-                >
-                  <Box sx={{ p: 2 }}>
-                    <Line data={chartData} options={chartOptions} />
-                  </Box>
-                </Paper>
-              </Grid>
-              <Grid item component="div" xs={12} md={4}>
-                <Paper 
-                  elevation={3} 
-                  sx={{ 
-                    background: 'rgba(19, 47, 76, 0.4)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
-                  }}
-                >
-                  <TableContainer sx={{ maxHeight: 440 }}>
-                    <Table stickyHeader>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Date</TableCell>
-                          <TableCell align="right">Weight</TableCell>
-                          <TableCell align="right">Action</TableCell>
+            <Stack spacing={4}>
+              <Paper 
+                elevation={3} 
+                sx={{ 
+                  p: 4,
+                  background: 'rgba(19, 47, 76, 0.4)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+                }}
+              >
+                <Box sx={{ p: 2 }}>
+                  <Line data={chartData} options={chartOptions} />
+                </Box>
+              </Paper>
+              <Paper 
+                elevation={3} 
+                sx={{ 
+                  background: 'rgba(19, 47, 76, 0.4)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+                }}
+              >
+                <TableContainer sx={{ maxHeight: 440 }}>
+                  <Table stickyHeader>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Date</TableCell>
+                        <TableCell align="right">Weight</TableCell>
+                        <TableCell align="right">Action</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {weightEntries.map((entry) => (
+                        <TableRow key={entry.date}>
+                          <TableCell>{entry.date}</TableCell>
+                          <TableCell align="right">{entry.weight}</TableCell>
+                          <TableCell align="right">
+                            <Tooltip title="Delete entry">
+                              <IconButton 
+                                size="small" 
+                                onClick={() => handleDelete(entry.date)}
+                                sx={{ 
+                                  color: theme.palette.error.main,
+                                  '&:hover': {
+                                    color: theme.palette.error.light,
+                                  }
+                                }}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </Tooltip>
+                          </TableCell>
                         </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {weightEntries.map((entry) => (
-                          <TableRow key={entry.date}>
-                            <TableCell>{entry.date}</TableCell>
-                            <TableCell align="right">{entry.weight}</TableCell>
-                            <TableCell align="right">
-                              <Tooltip title="Delete entry">
-                                <IconButton 
-                                  size="small" 
-                                  onClick={() => handleDelete(entry.date)}
-                                  sx={{ 
-                                    color: theme.palette.error.main,
-                                    '&:hover': {
-                                      color: theme.palette.error.light,
-                                    }
-                                  }}
-                                >
-                                  <DeleteIcon />
-                                </IconButton>
-                              </Tooltip>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Paper>
-              </Grid>
-            </Grid>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+            </Stack>
           )}
 
           {weightEntries.length === 0 && (
