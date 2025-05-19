@@ -1,9 +1,9 @@
 {
-  "name": "Aakashweighttracker",
+  "name": "weight-tracker",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Aakash22-code.github.io/Aakashweighttracker",
+  "homepage": "https://Aakash22-code.github.io/weight-tracker",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
